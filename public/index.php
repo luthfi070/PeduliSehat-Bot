@@ -62,9 +62,9 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                 {
                     if($event['message']['text'] == "pagi lort")
                 {
-                    $result = $bot->replyText($replyToken['replyToken'], "cringeee");
+                    $result = $bot->replyText($event['replyToken'], "cringeee");
 
-                    $response->getBody()->write(json_decode($result->getJSONDecodedBody()));
+                    $response->getBody()->write(json_encode($result->getJSONDecodedBody()));
                     return $response
                         ->withHeader('Content-Type', 'application/json')
                         ->withStatus($result->getHTTPStatus());
