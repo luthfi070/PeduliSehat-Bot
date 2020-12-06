@@ -6,7 +6,7 @@
       "contents": [
         {
           "type": "text",
-          "text": "Brown Cafe",
+          "text": "Bot botan",
           "weight": "bold",
           "size": "xl"
         },
@@ -23,14 +23,14 @@
               "contents": [
                 {
                   "type": "text",
-                  "text": "Place",
+                  "text": "Name",
                   "color": "#aaaaaa",
                   "size": "sm",
                   "flex": 1
                 },
                 {
                   "type": "text",
-                  "text": "Miraina Tower, 4-1-6 Shinjuku, Tokyo",
+                  "text": "Bot botan",
                   "wrap": true,
                   "color": "#666666",
                   "size": "sm",
@@ -45,14 +45,14 @@
               "contents": [
                 {
                   "type": "text",
-                  "text": "Time",
+                  "text": "Function",
                   "color": "#aaaaaa",
                   "size": "sm",
                   "flex": 1
                 },
                 {
                   "type": "text",
-                  "text": "10:00 - 23:00",
+                  "text": "Flex, Push",
                   "wrap": true,
                   "color": "#666666",
                   "size": "sm",
@@ -74,19 +74,9 @@
           "style": "link",
           "height": "sm",
           "action": {
-            "type": "uri",
-            "label": "CALL",
-            "uri": "https://linecorp.com"
-          }
-        },
-        {
-          "type": "button",
-          "style": "link",
-          "height": "sm",
-          "action": {
-            "type": "uri",
-            "label": "WEBSITE",
-            "uri": "https://linecorp.com"
+            "type": "postback",
+            "label": "MULAI",
+            "data": "/mulai"
           }
         },
         {
