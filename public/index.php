@@ -81,16 +81,18 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                             ->withStatus($result->getHTTPStatus());
                     }
                     else if($event['message']['text'] == "hitomi"){
-                        $packageId = 1;
-                        $stickerId = 3;
-                        $stickerMessageBuilder = new StickerMessageBuilder($packageId, $stickerId);
+
                         $result = $bot->replyText($event['replyToken'], "istrinya luthfi bukan");
-                        $bot->replyMessage($replyToken, $stickerMessageBuilder);
 
                         $response->getBody()->write(json_encode($result->getJSONDecodedBody()));
                         return $response
                             ->withHeader('Content-Type', 'application/json')
-                            ->withStatus($result->getHTTPStatus());                        
+                            ->withStatus($result->getHTTPStatus());    
+
+                        $packageId = 1;
+                        $stickerId = 3;
+                        $stickerMessageBuilder = new StickerMessageBuilder($packageId, $stickerId);
+                        $bot->replyMessage($replyToken, $stickerMessageBuilder);
                     }
                     else{
                         $result = $bot->replyText($event['replyToken'], $event['message']['text'] . " " . "kaga ada disini");
