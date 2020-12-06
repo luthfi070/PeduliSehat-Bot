@@ -82,10 +82,10 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                     }
                     else if($event['message']['text'] == "hitomi"){
                         $packageId = 1;
-                        $stickerId = 410;
+                        $stickerId = 3;
                         $stickerMessageBuilder = new StickerMessageBuilder($packageId, $stickerId);
                         $result = $bot->replyText($event['replyToken'], "istrinya luthfi bukan");
-                        $result = $bot->replyMessage($replyToken, $stickerMessageBuilder);
+                        $bot->replyMessage($replyToken, $stickerMessageBuilder);
 
                         $response->getBody()->write(json_encode($result->getJSONDecodedBody()));
                         return $response
