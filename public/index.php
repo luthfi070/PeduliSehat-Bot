@@ -60,27 +60,27 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
             {
                 if($event['message']['type'] == 'text')
                 {
-                    // send same message as reply to user
-                    $result = $bot->replyText($event['replyToken'], $event['message']['text']);
-
-
-                    // or we can use replyMessage() instead to send reply message
-                    // $textMessageBuilder = new TextMessageBuilder($event['message']['text']);
-                    // $result = $bot->replyMessage($event['replyToken'], $textMessageBuilder);
-
-
-                    $response->getBody()->write(json_encode($result->getJSONDecodedBody()));
-                    return $response
-                        ->withHeader('Content-Type', 'application/json')
-                        ->withStatus($result->getHTTPStatus());
-                }else if($event['message']['text'] == 'pagi lort')
+                    if($event['message']['text'] == "pagi lort")
                 {
-                    $result = $bot->replyText($event['replyToken'], "cringe sumpah");
+                    $result = $bot->replyText($replyToken, "cringe sumpah");
 
                     $response->getBody()->write(json_decode($result->getJSONDecodedBody()));
                     return $response
                         ->withHeader('Content-Type', 'application/json')
                         ->withStatus($result->getHTTPStatus());
+                }else{
+                    // send same message as reply to user
+                    $result = $bot->replyText($event['replyToken'], $event['message']['text']);
+
+                    // or we can use replyMessage() instead to send reply message
+                    // $textMessageBuilder = new TextMessageBuilder($event['message']['text']);
+                    // $result = $bot->replyMessage($event['replyToken'], $textMessageBuilder);
+                    
+                    $response->getBody()->write(json_encode($result->getJSONDecodedBody()));
+                    return $response
+                        ->withHeader('Content-Type', 'application/json')
+                        ->withStatus($result->getHTTPStatus());
+                }
                 }
             }
         }
