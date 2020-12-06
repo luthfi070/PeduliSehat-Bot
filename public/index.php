@@ -57,6 +57,14 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
     if(is_array($data['events'])){
         foreach ($data['events'] as $event)
         {
+            if($event['source']['type'] == 'group' or $event['source']['type'] == 'room'){
+                $result = $bot->replyText($event['replyToken'], "Halo kenalin aku bot");
+
+                $response->getBody()->write(json_encode($result->getJSONDecodedBody()));
+                return $response
+                    ->withHeader('Content-Type', 'application/json')
+                    ->withStatus($result->getHTTPStatus());
+            }
             if ($event['type'] == 'message')
             {
                 for($x = 0; $x < count($nama); $x++){
@@ -71,7 +79,7 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                 }
                 if($event['message']['type'] == 'text')
                 {
-                    if($event['message']['text'] == "pagi lort")
+                    if($event['message']['text'] == "/mulai")
                     {
                         $result = $bot->replyText($event['replyToken'], "cringeee");
 
