@@ -62,7 +62,7 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                 for($x = 0; $x < count($nama); $x++){
                     if($event['message']['text'] == $nama[$x]){
                         $result = $bot->replyText($event['replyToken'], $nama[$x] . "baik dechh");
-
+                        
                         $response->getBody()->write(json_encode($result->getJSONDecodedBody()));
                         return $response
                             ->withHeader('Content-Type', 'application/json')
@@ -72,26 +72,36 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                 if($event['message']['type'] == 'text')
                 {
                     if($event['message']['text'] == "pagi lort")
-                {
-                    $result = $bot->replyText($event['replyToken'], "cringeee");
+                    {
+                        $result = $bot->replyText($event['replyToken'], "cringeee");
 
-                    $response->getBody()->write(json_encode($result->getJSONDecodedBody()));
-                    return $response
-                        ->withHeader('Content-Type', 'application/json')
-                        ->withStatus($result->getHTTPStatus());
-                }
-                else{
-                    $result = $bot->replyText($event['replyToken'], $event['message']['text'] . " " . "kaga ada disini");
+                        $response->getBody()->write(json_encode($result->getJSONDecodedBody()));
+                        return $response
+                            ->withHeader('Content-Type', 'application/json')
+                            ->withStatus($result->getHTTPStatus());
+                    }
+                    else if($event['message']['text'] == "hitomi"){
+                        $result = $bot->replyText($event['replyToken'], "istrinya luthfi bukan");
+                        $stickerMessageBuilder = new StickerMessageBuilder(1, 410);
+                        $bot->replyMessage($event['replyToken'], $stickerMessageBuilder);
+                        
+                        $response->getBody()->write(json_encode($result->getJSONDecodedBody()));
+                        return $response
+                            ->withHeader('Content-Type', 'application/json')
+                            ->withStatus($result->getHTTPStatus());                        
+                    }
+                    else{
+                        $result = $bot->replyText($event['replyToken'], $event['message']['text'] . " " . "kaga ada disini");
 
-                    // or we can use replyMessage() instead to send reply message
-                    // $textMessageBuilder = new TextMessageBuilder($event['message']['text']);
-                    // $result = $bot->replyMessage($event['replyToken'], $textMessageBuilder);
-                    
-                    $response->getBody()->write(json_encode($result->getJSONDecodedBody()));
-                    return $response
-                        ->withHeader('Content-Type', 'application/json')
-                        ->withStatus($result->getHTTPStatus());
-                }
+                        // or we can use replyMessage() instead to send reply message
+                        // $textMessageBuilder = new TextMessageBuilder($event['message']['text']);
+                        // $result = $bot->replyMessage($event['replyToken'], $textMessageBuilder);
+                        
+                        $response->getBody()->write(json_encode($result->getJSONDecodedBody()));
+                        return $response
+                            ->withHeader('Content-Type', 'application/json')
+                            ->withStatus($result->getHTTPStatus());
+                    }
                 }
             }
         }
