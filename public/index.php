@@ -67,7 +67,7 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                         return $response
                             ->withHeader('Content-Type', 'application/json')
                             ->withStatus($result->getHTTPStatus());
-                    }else if($x == $count($nama) && $event['message']['text'] != $nama[$x]){
+                    }else if($x == count($nama) && $event['message']['text'] != $nama[$x]){
                         $result = $bot->replyText($event['replyToken'], $event["message"]["text"] . "kaga ada disini anj");
 
                         $response->getBody()->write(json_encode($result->getJSONDecodedBody()));
