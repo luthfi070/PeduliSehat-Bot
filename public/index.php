@@ -58,11 +58,11 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
         foreach ($data['events'] as $event)
         {
             if($event['source']['type'] == 'group' or $event['source']['type'] == 'room'){
-                $result = $bot->replyText($event['replyToken'], "Halo kenalin aku bot luthfi");
-                $response->getBody()->write(json_encode($result->getJSONDecodedBody()));
-                return $response
-                    ->withHeader('Content-Type', 'application/json')
-                    ->withStatus($result->getHTTPStatus());
+                // $result = $bot->replyText($event['replyToken'], "Halo kenalin aku bot luthfi");
+                // $response->getBody()->write(json_encode($result->getJSONDecodedBody()));
+                // return $response
+                //     ->withHeader('Content-Type', 'application/json')
+                //     ->withStatus($result->getHTTPStatus());
                 
                 $flexTemplate = file_get_contents("../flexMessageGroup.json"); // template flex message
                 $result = $httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
