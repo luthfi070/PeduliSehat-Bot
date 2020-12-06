@@ -67,13 +67,6 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                         return $response
                             ->withHeader('Content-Type', 'application/json')
                             ->withStatus($result->getHTTPStatus());
-                    }else if($x == count($nama)){
-                        $result = $bot->replyText($event['replyToken'], $event["message"]["text"] . "kaga ada disini anj");
-
-                        $response->getBody()->write(json_encode($result->getJSONDecodedBody()));
-                        return $response
-                            ->withHeader('Content-Type', 'application/json')
-                            ->withStatus($result->getHTTPStatus());
                     }
                 }
                 if($event['message']['type'] == 'text')
@@ -88,7 +81,7 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                         ->withStatus($result->getHTTPStatus());
                 }
                 else{
-                    $result = $bot->replyText($event['replyToken'], "naon");
+                    $result = $bot->replyText($event['replyToken'], $event['message']['text'] . " " . "kaga ada disini");
 
                     // or we can use replyMessage() instead to send reply message
                     // $textMessageBuilder = new TextMessageBuilder($event['message']['text']);
