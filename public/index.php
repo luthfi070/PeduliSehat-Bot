@@ -70,7 +70,7 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                         ->withStatus($result->getHTTPStatus());
                 }else{
                     // send same message as reply to user
-                    $result = $bot->replyText($event['replyToken'], $event['message']['text']);
+                    $result = $bot->replyText($event['replyToken'], "naon");
 
                     // or we can use replyMessage() instead to send reply message
                     // $textMessageBuilder = new TextMessageBuilder($event['message']['text']);
