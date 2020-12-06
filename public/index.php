@@ -53,11 +53,17 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
     
 // kode aplikasi nanti disini
     $data = json_decode($body, true);
+    $nama = array("neta", "silmy", "danar", "dana", "yuzza", "made");
     if(is_array($data['events'])){
         foreach ($data['events'] as $event)
         {
             if ($event['type'] == 'message')
             {
+                for($x = 0; $x < count($nama); $x++){
+                    if($event['message']['type'] == $nama[$x]){
+                        $result = $bot->replyText($event['replyToken'], $nama[$x]+"baik dech");
+                    }
+                }
                 if($event['message']['type'] == 'text')
                 {
                     if($event['message']['text'] == "pagi lort")
@@ -68,8 +74,8 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                     return $response
                         ->withHeader('Content-Type', 'application/json')
                         ->withStatus($result->getHTTPStatus());
-                }else{
-                    // send same message as reply to user
+                }
+                else{
                     $result = $bot->replyText($event['replyToken'], "naon");
 
                     // or we can use replyMessage() instead to send reply message
