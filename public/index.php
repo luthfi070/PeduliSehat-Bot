@@ -92,7 +92,7 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                         $packageId = 1;
                         $stickerId = 3;
                         $stickerMessageBuilder = new StickerMessageBuilder($packageId, $stickerId);
-                        $bot->replyMessage($replyToken, $stickerMessageBuilder);
+                        $bot->replySticker($replyToken, 1, 3);
                     }
                     else{
                         $result = $bot->replyText($event['replyToken'], $event['message']['text'] . " " . "kaga ada disini");
