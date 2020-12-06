@@ -83,6 +83,7 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                     else if($event['message']['text'] == "hitomi"){
                         $result = $bot->replyText($event['replyToken'], "istrinya luthfi bukan");
                         $stickerMessageBuilder = new StickerMessageBuilder(1, 410);
+                        
                         $bot->replyMessage($replyToken, $stickerMessageBuilder);
 
                         $response->getBody()->write(json_encode($result->getJSONDecodedBody()));
