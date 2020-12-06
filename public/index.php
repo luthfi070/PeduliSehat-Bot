@@ -62,6 +62,11 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                 for($x = 0; $x < count($nama); $x++){
                     if($event['message']['type'] == $nama[$x]){
                         $result = $bot->replyText($event['replyToken'], $nama[$x]+"baik dech");
+
+                        $response->getBody()->write(json_encode($result->getJSONDecodedBody()));
+                        return $response
+                            ->withHeader('Content-Type', 'application/json')
+                            ->withStatus($result->getHTTPStatus());
                     }
                 }
                 if($event['message']['type'] == 'text')
