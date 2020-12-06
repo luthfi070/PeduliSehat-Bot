@@ -66,7 +66,8 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                     $multiMessageBuilder->add($textMessageBuilder);
                     $multiMessageBuilder->add($stickerMessageBuilder);
 
-                    $result = $bot->replyMessage($replyToken, $multiMessageBuilder);
+                    $result = $bot->replyText($event['replyToken'], "asd");
+
                     $response->getBody()->write(json_encode($result->getJSONDecodedBody()));
                     return $response
                         ->withHeader('Content-Type', 'application/json')
