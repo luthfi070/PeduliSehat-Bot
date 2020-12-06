@@ -66,12 +66,8 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                     $multiMessageBuilder->add($textMessageBuilder);
                     $multiMessageBuilder->add($stickerMessageBuilder);
 
-                    $result = $bot->replyText($event['replyToken'], "asd");
+                    $bot->replyMessage($replyToken, $multiMessageBuilder);
 
-                    $response->getBody()->write(json_encode($result->getJSONDecodedBody()));
-                    return $response
-                        ->withHeader('Content-Type', 'application/json')
-                        ->withStatus($result->getHTTPStatus());
                 }else{
                     $flexTemplate = file_get_contents("../flexMessageGroup.json"); // template flex message
                     $result = $httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
