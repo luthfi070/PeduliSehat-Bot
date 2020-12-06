@@ -74,9 +74,9 @@
           "style": "link",
           "height": "sm",
           "action": {
-            "type": "postback",
+            "type": "message",
             "label": "MULAI",
-            "data": "/mulai"
+            "text": "/mulai"
           }
         },
         {
