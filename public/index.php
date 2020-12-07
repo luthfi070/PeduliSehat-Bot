@@ -70,7 +70,19 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                     // $multiMessageBuilder->add($stickerMessageBuilder);
                      
                      
-                    $bot->replyText($event['replyToken'], "asdsad");
+                    $bot->replyMessage(array(
+                        'replyToken' => $event['replyToken'],
+                        'message' => array(
+                            array(
+                                'type' => 'text',
+                                'text' => 'halo pengguna'
+                            ),
+                            array(
+                                'type' => 'text',
+                                'text' => 'haha'
+                            )
+                        )
+                    ));
 
                     $response->getBody()->write(json_encode($result->getJSONDecodedBody()));
                     return $response
