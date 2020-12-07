@@ -6,7 +6,7 @@
       "contents": [
         {
           "type": "text",
-          "text": "Bot botan",
+          "text": "PeduliSehat Bot",
           "weight": "bold",
           "size": "xl"
         },
@@ -23,14 +23,14 @@
               "contents": [
                 {
                   "type": "text",
-                  "text": "Name",
+                  "text": "Fungsi",
                   "color": "#aaaaaa",
-                  "size": "sm",
+                  "size": "md",
                   "flex": 1
                 },
                 {
                   "type": "text",
-                  "text": "Bot botan",
+                  "text": "Melihat perkembangan Covid 19",
                   "wrap": true,
                   "color": "#666666",
                   "size": "sm",
@@ -45,14 +45,14 @@
               "contents": [
                 {
                   "type": "text",
-                  "text": "Function",
+                  "text": "Dibuat Oleh",
                   "color": "#aaaaaa",
                   "size": "sm",
                   "flex": 1
                 },
                 {
                   "type": "text",
-                  "text": "Flex, Push",
+                  "text": "Luthfi Fitra Musyaffa",
                   "wrap": true,
                   "color": "#666666",
                   "size": "sm",
