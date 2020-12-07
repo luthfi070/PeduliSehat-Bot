@@ -70,7 +70,12 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                     $multiMessageBuilder->add($stickerMessageBuilder);
                      
                      
-                    $bot->replyMessage($replyToken, $multiMessageBuilder);
+                    $result = $bot->replyMessage($replyToken, $multiMessageBuilder);
+                    
+                    $response->getBody()->write(json_encode($result->getJSONDecodedBody()));
+                    return $response
+                        ->withHeader('Content-Type', 'application/json')
+                        ->withStatus($result->getHTTPStatus());
 
                 }else{
                     $flexTemplate = file_get_contents("../flexMessageGroup.json"); // template flex message
