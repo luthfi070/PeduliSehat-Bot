@@ -59,35 +59,15 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
         {
             if($event['source']['type'] == 'group' or $event['source']['type'] == 'room'){
                 if($event['message']['text'] == "/mulai"){
-                    // $textMessageBuilder1 = new TextMessageBuilder('ini pesan balasan pertama');
-                    // $textMessageBuilder2 = new TextMessageBuilder('ini pesan balasan kedua');
-                    // $stickerMessageBuilder = new StickerMessageBuilder(1, 106);
-                     
-                     
-                    // $multiMessageBuilder = new MultiMessageBuilder();
-                    // $multiMessageBuilder->add($textMessageBuilder1);
-                    // $multiMessageBuilder->add($textMessageBuilder2);
-                    // $multiMessageBuilder->add($stickerMessageBuilder);
-                     
-                     
-                    $bot->replyMessage(array(
-                        'replyToken' => $event['replyToken'],
-                        'message' => array(
-                            array(
-                                'type' => 'text',
-                                'text' => 'halo pengguna'
-                            ),
-                            array(
-                                'type' => 'text',
-                                'text' => 'haha'
-                            )
-                        )
-                    ));
+                    $multiMessageBuilder = new MultiMessageBuilder();
+                    $multiMessageBuilder->add(new TextMessageBuilder('haloo', 'pengguna'));
+                    $multiMessageBuilder->add(new StickerMessageBuilder(1, 3));        
+                    $res = $bot->replyMessage($event['replyToken'], $multiMessageBuilder);            
 
-                    $response->getBody()->write(json_encode($result->getJSONDecodedBody()));
-                    return $response
-                        ->withHeader('Content-Type', 'application/json')
-                        ->withStatus($result->getHTTPStatus());
+                    // $response->getBody()->write(json_encode($result->getJSONDecodedBody()));
+                    // return $response
+                    //     ->withHeader('Content-Type', 'application/json')
+                    //     ->withStatus($result->getHTTPStatus());
 
                 }else{
                     $flexTemplate = file_get_contents("../flexMessageGroup.json"); // template flex message
