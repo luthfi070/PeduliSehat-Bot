@@ -59,15 +59,17 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
         {
             if($event['source']['type'] == 'group' or $event['source']['type'] == 'room'){
                 if($event['message']['text'] == "/mulai"){
-                    $multiMessageBuilder = new MultiMessageBuilder();
-                    $multiMessageBuilder->add(new TextMessageBuilder('haloo', 'pengguna'));
-                    $multiMessageBuilder->add(new StickerMessageBuilder(1, 3));        
-                    $res = $bot->replyMessage($event['replyToken'], $multiMessageBuilder);            
-
+                    // $multiMessageBuilder = new MultiMessageBuilder();
+                    // $multiMessageBuilder->add(new TextMessageBuilder('haloo', 'pengguna'));
+                    // $multiMessageBuilder->add(new StickerMessageBuilder(1, 3));        
+                    // $res = $bot->replyMessage($event['replyToken'], $multiMessageBuilder);            
                     // $response->getBody()->write(json_encode($result->getJSONDecodedBody()));
                     // return $response
                     //     ->withHeader('Content-Type', 'application/json')
                     //     ->withStatus($result->getHTTPStatus());
+                    $api = new ApiHelper();
+                    $data = $api->callRoute('GET', 'https://api.kawalcorona.com/indonesia');
+                    $bot->replyText($event['replyToken'], "Data positif covid saat ini : {$data->positif} " . $data->positif);
 
                 }else{
                     $flexTemplate = file_get_contents("../flexMessageGroup.json"); // template flex message
