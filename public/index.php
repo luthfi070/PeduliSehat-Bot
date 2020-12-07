@@ -59,13 +59,17 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
         {
             if($event['source']['type'] == 'group' or $event['source']['type'] == 'room'){
                 if($event['message']['text'] == "/mulai"){
-                    $textMessageBuilder = new TextMessageBuilder('Udah rada mending kayanya');
+                    $textMessageBuilder1 = new TextMessageBuilder('ini pesan balasan pertama');
+                    $textMessageBuilder2 = new TextMessageBuilder('ini pesan balasan kedua');
                     $stickerMessageBuilder = new StickerMessageBuilder(1, 106);
-
+                     
+                     
                     $multiMessageBuilder = new MultiMessageBuilder();
-                    $multiMessageBuilder->add($textMessageBuilder);
+                    $multiMessageBuilder->add($textMessageBuilder1);
+                    $multiMessageBuilder->add($textMessageBuilder2);
                     $multiMessageBuilder->add($stickerMessageBuilder);
-
+                     
+                     
                     $bot->replyMessage($replyToken, $multiMessageBuilder);
 
                 }else{
