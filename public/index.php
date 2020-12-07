@@ -72,8 +72,8 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                     curl_setopt($dataUrl,CURLOPT_RETURNTRANSFER,true);
                     $response = curl_exec($dataUrl);
                     $result = json_decode($response);
-                    $bot->replyText($event['replyToken'], $result['positif']);
-                    
+                    $bot->replyText($event['replyToken'], $result);
+
                     return $response
                         ->withHeader('Content-Type', 'application/json')
                         ->withStatus($bot->getHTTPStatus());
