@@ -68,8 +68,9 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                     //     ->withHeader('Content-Type', 'application/json')
                     //     ->withStatus($result->getHTTPStatus());
                     $app->get('https://api.kawalcorona.com/indonesia', function (Request $request, Response $response, array $args){
-                        $jumlah = $args['positif'];
-                        $bot->replyMessage($event['replyToken'], $jumlah);
+                        $body = $request->getBody();
+                        $data = json_decode($body, true);
+                        $bot->replyText($event['replyToken'], $data['positif']);
                     });
                 }else{
                     $flexTemplate = file_get_contents("../flexMessageGroup.json"); // template flex message
