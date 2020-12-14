@@ -92,7 +92,7 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                 }
                 else if($event['message']['text'] == '/positif')
                 {          
-                    $res = $bot->replyText($event['replyToken'], $array[0][0]["positif"]);
+                    $res = $bot->replyText($event['replyToken'], "Jumlah positif di Indonesia saat ini : " . $array[0][0]["positif"]);
                 }else{
                     $flexTemplate = file_get_contents("../flexMessageGroup.json"); // template flex message
                     $result = $httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
