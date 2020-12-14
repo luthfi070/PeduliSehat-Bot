@@ -90,7 +90,7 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                         ],
                     ]);
                 }
-                else if($event['type'] == '/positif')
+                else if($event['message']['text'] == '/positif')
                 {          
                     $res = $bot->replyText($event['replyToken'], $array[0][0]["positif"]);
                 }else{
