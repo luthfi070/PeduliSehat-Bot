@@ -54,38 +54,44 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
 // kode aplikasi nanti disini
     $data = json_decode($body, true);
     $nama = array("neta", "silmy", "danar", "dana", "yuzza", "made");
+    $curl = curl_init();
+ 
+    curl_setopt_array($curl, array(
+      CURLOPT_URL => 'https://api.kawalcorona.com/indonesia/',
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_ENCODING => '',
+      CURLOPT_MAXREDIRS => 10,
+      CURLOPT_TIMEOUT => 0,
+      CURLOPT_FOLLOWLOCATION => true,
+      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+      CURLOPT_CUSTOMREQUEST => 'GET',
+    ));
+     
+    $response = curl_exec($curl);
+     
+    curl_close($curl);
+
+    $decoded = json_decode($response, true);
+    $array = array($decoded);    
     if(is_array($data['events'])){
         foreach ($data['events'] as $event)
         {
             if($event['source']['type'] == 'group' or $event['source']['type'] == 'room'){
                 if($event['message']['text'] == "/mulai"){
-                    // $multiMessageBuilder = new MultiMessageBuilder();
-                    // $multiMessageBuilder->add(new TextMessageBuilder('haloo', 'pengguna'));
-                    // $multiMessageBuilder->add(new StickerMessageBuilder(1, 3));        
-                    // $res = $bot->replyMessage($event['replyToken'], $multiMessageBuilder);            
-                    // $response->getBody()->write(json_encode($result->getJSONDecodedBody()));
-                    // return $response
-                    //     ->withHeader('Content-Type', 'application/json')
-                    //     ->withStatus($result->getHTTPStatus());
-                    $curl = curl_init();
- 
-                    curl_setopt_array($curl, array(
-                      CURLOPT_URL => 'https://api.kawalcorona.com/indonesia/',
-                      CURLOPT_RETURNTRANSFER => true,
-                      CURLOPT_ENCODING => '',
-                      CURLOPT_MAXREDIRS => 10,
-                      CURLOPT_TIMEOUT => 0,
-                      CURLOPT_FOLLOWLOCATION => true,
-                      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                      CURLOPT_CUSTOMREQUEST => 'GET',
-                    ));
-                     
-                    $response = curl_exec($curl);
-                     
-                    curl_close($curl);
-
-                    $decoded = json_decode($response, true);
-                    $array = array($decoded);              
+                    $flexTemplateMenu = file_get_contents("../flexMessageMenu.json"); // template flex message
+                    $result = $httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
+                        'replyToken' => $event['replyToken'],
+                        'messages'   => [
+                            [ 
+                                'type'     => 'flex',
+                                'altText'  => 'Test Flex Message',
+                                'contents' => json_decode($flexTemplateMenu)
+                            ]
+                        ],
+                    ]);
+                }
+                else if($event['type'] == '/positif')
+                {          
                     $res = $bot->replyText($event['replyToken'], $array[0][0]["positif"]);
                 }else{
                     $flexTemplate = file_get_contents("../flexMessageGroup.json"); // template flex message
