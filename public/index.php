@@ -67,13 +67,24 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                     // return $response
                     //     ->withHeader('Content-Type', 'application/json')
                     //     ->withStatus($result->getHTTPStatus());
-                    $url = 'https://api.kawalcorona.com/indonesia';
-                    $dataUrl = curl_init($url);
-                    curl_setopt($dataUrl,CURLOPT_RETURNTRANSFER,true);
-                    $response = curl_exec($dataUrl);
-                    $result = json_decode($response);
-                    $bot->replyText($event['replyToken'], $result);
-                    echo($result);
+                    $curl = curl_init();
+ 
+                    curl_setopt_array($curl, array(
+                      CURLOPT_URL => 'https://api.kawalcorona.com/indonesia/',
+                      CURLOPT_RETURNTRANSFER => true,
+                      CURLOPT_ENCODING => '',
+                      CURLOPT_MAXREDIRS => 10,
+                      CURLOPT_TIMEOUT => 0,
+                      CURLOPT_FOLLOWLOCATION => true,
+                      CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                      CURLOPT_CUSTOMREQUEST => 'GET',
+                    ));
+                     
+                    $response = curl_exec($curl);
+                     
+                    curl_close($curl);
+                     
+                    $res = $bot->replyMessage($event['replyToken'], $response['meninggal']);
                 }else{
                     $flexTemplate = file_get_contents("../flexMessageGroup.json"); // template flex message
                     $result = $httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
