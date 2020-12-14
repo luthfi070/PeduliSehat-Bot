@@ -83,14 +83,10 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                     $response = curl_exec($curl);
                      
                     curl_close($curl);
+
                     $decoded = json_decode($response, true);
                     
                     $res = $bot->replyText($event['replyToken'], $decoded[0]);
-
-                    $app->get('/', function (Request $request, Response $response, $args) {
-                        $response->getBody()->write($decoded);
-                        return $response;
-                    });
                 }else{
                     $flexTemplate = file_get_contents("../flexMessageGroup.json"); // template flex message
                     $result = $httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
