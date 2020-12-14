@@ -83,7 +83,8 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                     $response = curl_exec($curl);
                      
                     curl_close($curl);
-                     
+                    $decoded = json_decode($response, true);
+                    
                     $res = $bot->replyText($event['replyToken'], $response['meninggal']);
                 }else{
                     $flexTemplate = file_get_contents("../flexMessageGroup.json"); // template flex message
