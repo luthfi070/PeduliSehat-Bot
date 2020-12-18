@@ -81,20 +81,22 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
 
         class replyList{
             public static function menu(){
-                $flexTemplate = file_get_contents("../flexMessageGroup.json"); // template flex message
-                $result = $httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
-                    'replyToken' => $event['replyToken'],
-                    'messages'   => [
-                        [ 
-                            'type'     => 'flex',
-                            'altText'  => 'Test Flex Message',
-                            'contents' => json_decode($flexTemplate)
-                        ]
-                    ],
-                ]);
+                $app->post('/webhook', function (Request $request, Response $response) use ($channel_secret, $bot, $httpClient, $pass_signature) {
+                    $flexTemplate = file_get_contents("../flexMessageGroup.json"); // template flex message
+                    $result = $httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
+                        'replyToken' => $event['replyToken'],
+                        'messages'   => [
+                            [ 
+                                'type'     => 'flex',
+                                'altText'  => 'Test Flex Message',
+                                'contents' => json_decode($flexTemplate)
+                            ]
+                        ],
+                    ]);
+                }
             }
         }
-        
+
         foreach ($data['events'] as $event)
         {
             if($event['source']['type'] == 'group' or $event['source']['type'] == 'room'){
