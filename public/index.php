@@ -52,10 +52,28 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
     }
     
 // kode aplikasi nanti disini
+    class replyList{
+        public static function menu(){
+            $flexTemplate = file_get_contents("../flexMessageGroup.json"); // template flex message
+            $result = $httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
+                'replyToken' => $event['replyToken'],
+                'messages'   => [
+                    [ 
+                        'type'     => 'flex',
+                        'altText'  => 'Test Flex Message',
+                        'contents' => json_decode($flexTemplate)
+                    ]
+                ],
+            ]);
+        }
+    }
+
     $data = json_decode($body, true);
     $nama = array("neta", "silmy", "danar", "dana", "yuzza", "made");
     $curl = curl_init();
  
+
+
     curl_setopt_array($curl, array(
       CURLOPT_URL => 'https://api.kawalcorona.com/indonesia/',
       CURLOPT_RETURNTRANSFER => true,
@@ -74,30 +92,22 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
     $decoded = json_decode($response, true);
     $array = array($decoded);    
     if(is_array($data['events'])){
+
+    
         foreach ($data['events'] as $event)
         {
             if($event['source']['type'] == 'group' or $event['source']['type'] == 'room'){
                 if($event['message']['text'] == "/mulai"){
-                    $flexTemplateMenu = file_get_contents("../flexMessageMenu.json"); // template flex message
-                    $result = $httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
-                        'replyToken' => $event['replyToken'],
-                        'messages'   => [
-                            [ 
-                                'type'     => 'flex',
-                                'altText'  => 'Test Flex Message',
-                                'contents' => json_decode($flexTemplateMenu)
-                            ]
-                        ],
-                    ]);
+                    replyList::menu();
                 }
                 else if($event['message']['text'] == '/onBoarding'){
                     $res = $bot->replyText($event['replyToken'],
                     " Bot ni adalah bot yang berguna untuk memantau perkembangan virus covid 19 atau dikenal sebagai corona di Indonesia, berikut beberapa hal yang bisa anda lakukan di bot ini : 
-    - Lihat jumlah positif di Indonesia
-    - Lihat jumlah pasien yang sudah sembuh di Indonesia
-    - Lihat jumlah pasien yang sudah meninggal di Indonesia
-    - Lihat perkembangan covid 19 di suatu provinsi
-    - Lihat perkembangan covid 19 di suatu negara");
+- Lihat jumlah positif di Indonesia
+- Lihat jumlah pasien yang sudah sembuh di Indonesia
+- Lihat jumlah pasien yang sudah meninggal di Indonesia
+- Lihat perkembangan covid 19 di suatu provinsi
+- Lihat perkembangan covid 19 di suatu negara");
                 }else if($event['message']['text'] == '/positif'){          
                     $res = $bot->replyText($event['replyToken'], "Jumlah pasien positif di Indonesia saat ini : " . $array[0][0]["positif"]);
                 }else if($event['message']['text'] == '/sembuh'){
@@ -106,17 +116,7 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                     $res = $bot->replyText($event['replyToken'], "Jumlah pasien meninggal di Indonesia saat ini : " . $array[0][0]["meninggal"]);
                 }
                 else{
-                    $flexTemplate = file_get_contents("../flexMessageGroup.json"); // template flex message
-                    $result = $httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
-                        'replyToken' => $event['replyToken'],
-                        'messages'   => [
-                            [ 
-                                'type'     => 'flex',
-                                'altText'  => 'Test Flex Message',
-                                'contents' => json_decode($flexTemplate)
-                            ]
-                        ],
-                    ]);
+                    replyList::menu();
                 }    
             }else{
                 if ($event['type'] == 'message')
