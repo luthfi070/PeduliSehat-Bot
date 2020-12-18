@@ -92,13 +92,12 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                 }
                 else if($event['message']['text'] == '/onBoarding'){
                     $res = $bot->replyText($event['replyToken'],
-                    " Aplikasi ini adalah aplikasi yang berguna untuk memantau perkembangan virus covid 19 atau dikenal
-                    sebagai corona di Indonesia, berikut beberapa hal yang bisa anda lakukan di bot ini : 
-                    - Lihat jumlah positif di Indonesia
-                    - Lihat jumlah pasien yang sudah sembuh di Indonesia
-                    - Lihat jumlah pasien yang sudah meninggal di Indonesia
-                    - Lihat perkembangan covid 19 di suatu provinsi
-                    - Lihat perkembangan covid 19 di suatu negara");
+                    " Aplikasi ini adalah aplikasi yang berguna untuk memantau perkembangan virus covid 19 atau dikenal sebagai corona di Indonesia, berikut beberapa hal yang bisa anda lakukan di bot ini : 
+            - Lihat jumlah positif di Indonesia
+            - Lihat jumlah pasien yang sudah sembuh di Indonesia
+            - Lihat jumlah pasien yang sudah meninggal di Indonesia
+            - Lihat perkembangan covid 19 di suatu provinsi
+            - Lihat perkembangan covid 19 di suatu negara");
                 }else if($event['message']['text'] == '/positif'){          
                     $res = $bot->replyText($event['replyToken'], "Jumlah pasien positif di Indonesia saat ini : " . $array[0][0]["positif"]);
                 }else if($event['message']['text'] == '/sembuh'){
