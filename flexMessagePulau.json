@@ -24,7 +24,7 @@
         "action": {
           "type": "message",
           "label": "DKI Jakarta",
-          "text": "/jakarta"
+          "text": "31"
         }
       },
       {
@@ -34,14 +34,14 @@
         "action": {
           "type": "message",
           "label": "Jawa Barat",
-          "text": "/jabar"
+          "text": "32"
         }
       },
       {
         "type": "button",
         "action": {
           "type": "message",
-          "text": "/jatim",
+          "text": "35",
           "label": "Jawa Timur"
         }
       },
@@ -50,7 +50,7 @@
         "action": {
           "type": "message",
           "label": "Jawa Tengah",
-          "text": "/jateng"
+          "text": "33"
         }
       },
       {

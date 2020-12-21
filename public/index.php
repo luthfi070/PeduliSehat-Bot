@@ -143,11 +143,9 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                             ]
                         ],
                     ]);
-                }else if(in_array($event['message']['text'], $arrayPRov[0]))
-                {
+                }else if(in_array($event['message']['text'], $arrayPRov[0])){
                     $res = $bot->replyText($event['replyToken'], "ada");
-                }
-                else{
+                }else{
                     $flexTemplateMenu = file_get_contents("../flexMessagePulau.json"); // template flex message
                     $result = $httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
                         'replyToken' => $event['replyToken'],
