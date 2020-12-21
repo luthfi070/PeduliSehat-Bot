@@ -78,7 +78,7 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
     //Api Provinsi 
     $curlProv = curl_init();
 
-    curl_setopt_array($curl, array(
+    curl_setopt_array($curlProv, array(
         CURLOPT_URL => 'https://api.kawalcorona.com/indonesia/provinsi/',
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_ENCODING => '',
