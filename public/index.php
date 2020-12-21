@@ -144,22 +144,27 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                         ],
                     ]);
                 }else{
-                        if(in_array($event['message']['text'], $arrayPRov[0][0]['attributes'])){
+                    for($i = 0; $i < 35; $i++){
+                        if(in_array($event['message']['text'], $arrayPRov[0][$i]['attributes'])){
                             $res = $bot->replyText($event['replyToken'], "ada");
                         }else{
-                            continue;
-                        }
-                    $flexTemplateMenu = file_get_contents("../flexMessagePulau.json"); // template flex message
-                    $result = $httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
-                        'replyToken' => $event['replyToken'],
-                        'messages'   => [
-                            [ 
-                                'type'     => 'flex',
-                                'altText'  => 'Test Flex Message',
-                                'contents' => json_decode($flexTemplateMenu)
-                            ]
-                        ],
-                    ]);
+                            if($i == 34){
+                                $flexTemplateMenu = file_get_contents("../flexMessagePulau.json"); // template flex message
+                                $result = $httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
+                                    'replyToken' => $event['replyToken'],
+                                    'messages'   => [
+                                        [ 
+                                            'type'     => 'flex',
+                                            'altText'  => 'Test Flex Message',
+                                            'contents' => json_decode($flexTemplateMenu)
+                                        ]
+                                    ],
+                                ]);
+                            }else{
+                                continue;
+                            }
+                        } 
+                    }  
                 }    
             }else{
                 if ($event['type'] == 'message')
