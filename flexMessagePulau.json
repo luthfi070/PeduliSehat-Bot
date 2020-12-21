@@ -1,0 +1,63 @@
+{
+  "type": "bubble",
+  "body": {
+    "type": "box",
+    "layout": "vertical",
+    "contents": [
+      {
+        "type": "text",
+        "text": "Pilih Provinsi",
+        "weight": "bold",
+        "size": "xl"
+      }
+    ]
+  },
+  "footer": {
+    "type": "box",
+    "layout": "vertical",
+    "spacing": "sm",
+    "contents": [
+      {
+        "type": "button",
+        "style": "link",
+        "height": "sm",
+        "action": {
+          "type": "message",
+          "label": "DKI Jakarta",
+          "text": "/jakarta"
+        }
+      },
+      {
+        "type": "button",
+        "style": "link",
+        "height": "sm",
+        "action": {
+          "type": "message",
+          "label": "Jawa Barat",
+          "text": "/jabar"
+        }
+      },
+      {
+        "type": "button",
+        "action": {
+          "type": "message",
+          "text": "/jatim",
+          "label": "Jawa Timur"
+        }
+      },
+      {
+        "type": "button",
+        "action": {
+          "type": "message",
+          "label": "Jawa Tengah",
+          "text": "/jateng"
+        }
+      },
+      {
+        "type": "spacer",
+        "size": "sm"
+      }
+    ],
+    "flex": 0
+  }
+}

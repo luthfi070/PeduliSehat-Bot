@@ -56,9 +56,8 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
 
     $data = json_decode($body, true);
     $nama = array("neta", "silmy", "danar", "dana", "yuzza", "made");
+    //Api Indonesia
     $curl = curl_init();
- 
-
 
     curl_setopt_array($curl, array(
       CURLOPT_URL => 'https://api.kawalcorona.com/indonesia/',
@@ -74,29 +73,34 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
     $response = curl_exec($curl);
      
     curl_close($curl);
+    //end of Api Indonesia
+
+    //Api Provinsi 
+    $curlProv = curl_init();
+
+    curl_setopt_array($curl, array(
+        CURLOPT_URL => 'https://api.kawalcorona.com/indonesia/provinsi/',
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'GET',
+      ));
+
+    $responseProv = curl_exec($curlProv);
+
+    curl_close($curlProv);
+    //end of Api Provinsi
 
     $decoded = json_decode($response, true);
-    $array = array($decoded);    
+    $array = array($decoded);
+
+    $decodedProv = json_decode($responseProv, true);
+    $arrayPRov = array($decodedProv);
+
     if(is_array($data['events'])){
-
-        class replyList{
-            public static function menu(){
-                $app->post('/webhook', function (Request $request, Response $response) use ($channel_secret, $bot, $httpClient, $pass_signature) {
-                    $flexTemplate = file_get_contents("../flexMessageGroup.json"); // template flex message
-                    $result = $httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
-                        'replyToken' => $event['replyToken'],
-                        'messages'   => [
-                            [ 
-                                'type'     => 'flex',
-                                'altText'  => 'Test Flex Message',
-                                'contents' => json_decode($flexTemplate)
-                            ]
-                        ],
-                    ]);
-                }
-            }
-        }
-
         foreach ($data['events'] as $event)
         {
             if($event['source']['type'] == 'group' or $event['source']['type'] == 'room'){
@@ -127,9 +131,34 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                     $res = $bot->replyText($event['replyToken'], "Jumlah pasien sembuh di Indonesia saat ini : " . $array[0][0]["sembuh"]);
                 }else if($event['message']['text'] == '/meninggal'){
                     $res = $bot->replyText($event['replyToken'], "Jumlah pasien meninggal di Indonesia saat ini : " . $array[0][0]["meninggal"]);
+                }else if($event['message']['text'] == '/provinsi'){
+                    $flexTemplateMenu = file_get_contents("../flexMessagePulau.json"); // template flex message
+                    $result = $httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
+                        'replyToken' => $event['replyToken'],
+                        'messages'   => [
+                            [ 
+                                'type'     => 'flex',
+                                'altText'  => 'Test Flex Message',
+                                'contents' => json_decode($flexTemplateMenu)
+                            ]
+                        ],
+                    ]);
+                }else if(in_array($event['message']['text'], $arrayPRov[0]))
+                {
+                    $res = $bot->replyText($event['replyToken'], "ada");
                 }
                 else{
-                    replyList::menu();
+                    $flexTemplateMenu = file_get_contents("../flexMessagePulau.json"); // template flex message
+                    $result = $httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
+                        'replyToken' => $event['replyToken'],
+                        'messages'   => [
+                            [ 
+                                'type'     => 'flex',
+                                'altText'  => 'Test Flex Message',
+                                'contents' => json_decode($flexTemplateMenu)
+                            ]
+                        ],
+                    ]);
                 }    
             }else{
                 if ($event['type'] == 'message')
