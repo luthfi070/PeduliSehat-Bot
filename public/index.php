@@ -224,8 +224,8 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
 "Kasus Sembuh     : " . $arrayPRov[0][$i]['attributes']['Kasus_Semb'] . "\n" .
 "Kasus Meninggal : " . $arrayPRov[0][$i]['attributes']['Kasus_Meni']);
                         }else{
-                            if($i == 34){
-                                $flexTemplateMenu = file_get_contents("../flexMessagePulau.json"); // template flex message
+                            if($i == 33){
+                                $flexTemplateMenu = file_get_contents("../flexMessageGroup.json"); // template flex message
                                 $result = $httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
                                     'replyToken' => $event['replyToken'],
                                     'messages'   => [
