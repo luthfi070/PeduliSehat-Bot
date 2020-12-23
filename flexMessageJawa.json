@@ -1,0 +1,94 @@
+{
+    "type": "bubble",
+    "body": {
+      "type": "box",
+      "layout": "vertical",
+      "contents": [
+        {
+          "type": "text",
+          "text": "Jawa",
+          "weight": "bold",
+          "size": "xl"
+        },
+        {
+          "type": "box",
+          "layout": "vertical",
+          "margin": "lg",
+          "spacing": "sm",
+          "contents": []
+        }
+      ]
+    },
+    "footer": {
+      "type": "box",
+      "layout": "vertical",
+      "spacing": "sm",
+      "contents": [
+        {
+          "type": "button",
+          "style": "link",
+          "height": "sm",
+          "action": {
+            "type": "message",
+            "label": "DKI Jakarta",
+            "text": "31"
+          }
+        },
+        {
+          "type": "button",
+          "style": "link",
+          "height": "sm",
+          "action": {
+            "type": "message",
+            "label": "Jawa Timur",
+            "text": "35"
+          }
+        },
+        {
+          "type": "button",
+          "action": {
+            "type": "message",
+            "label": "Jawa Barat",
+            "text": "32"
+          }
+        },
+        {
+          "type": "button",
+          "action": {
+            "type": "message",
+            "label": "Jawa Tengah",
+            "text": "33"
+          }
+        },
+        {
+          "type": "button",
+          "action": {
+            "type": "message",
+            "label": "Banten",
+            "text": "36"
+          }
+        },
+        {
+          "type": "button",
+          "action": {
+            "type": "message",
+            "label": "DIY Yogyakarta",
+            "text": "34"
+          }
+        },
+        {
+          "type": "button",
+          "action": {
+            "type": "message",
+            "label": "Tampilkan Semua Pulau",
+            "text": "/provinsi"
+          }
+        },
+        {
+          "type": "spacer",
+          "size": "sm"
+        }
+      ],
+      "flex": 0
+    }
+  }

@@ -1,0 +1,111 @@
+{
+    "type": "bubble",
+    "body": {
+      "type": "box",
+      "layout": "vertical",
+      "contents": [
+        {
+          "type": "text",
+          "text": "Sumatera",
+          "weight": "bold",
+          "size": "xl"
+        }
+      ]
+    },
+    "footer": {
+      "type": "box",
+      "layout": "vertical",
+      "spacing": "sm",
+      "contents": [
+        {
+          "type": "button",
+          "style": "link",
+          "height": "sm",
+          "action": {
+            "type": "message",
+            "label": "Riau",
+            "text": "14"
+          }
+        },
+        {
+          "type": "button",
+          "style": "link",
+          "height": "sm",
+          "action": {
+            "type": "message",
+            "label": "Sumatera Barat",
+            "text": "13"
+          }
+        },
+        {
+          "type": "button",
+          "action": {
+            "type": "message",
+            "label": "Sumatera Utara",
+            "text": "12"
+          }
+        },
+        {
+          "type": "button",
+          "action": {
+            "type": "message",
+            "label": "Sumatera Selatan",
+            "text": "16"
+          }
+        },
+        {
+          "type": "button",
+          "action": {
+            "type": "message",
+            "label": "Aceh",
+            "text": "11"
+          }
+        },
+        {
+          "type": "button",
+          "action": {
+            "type": "message",
+            "label": "Lampung",
+            "text": "18"
+          }
+        },
+        {
+          "type": "button",
+          "action": {
+            "type": "message",
+            "label": "Bengkulu",
+            "text": "17"
+          }
+        },
+        {
+          "type": "button",
+          "action": {
+            "type": "message",
+            "label": "Jambi",
+            "text": "15"
+          }
+        },
+        {
+          "type": "button",
+          "action": {
+            "type": "message",
+            "label": "Bangka Belitung",
+            "text": "19"
+          }
+        },
+        {
+          "type": "button",
+          "action": {
+            "type": "message",
+            "label": "Tampilkan Semua Pulau",
+            "text": "/provinsi"
+          }
+        },
+        {
+          "type": "spacer",
+          "size": "sm"
+        }
+      ],
+      "flex": 0
+    }
+  }

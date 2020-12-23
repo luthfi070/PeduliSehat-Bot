@@ -6,7 +6,7 @@
     "contents": [
       {
         "type": "text",
-        "text": "Pilih Provinsi",
+        "text": "Pilih Pulau",
         "weight": "bold",
         "size": "xl"
       }
@@ -23,8 +23,8 @@
         "height": "sm",
         "action": {
           "type": "message",
-          "label": "DKI Jakarta",
-          "text": "31"
+          "label": "Jawa",
+          "text": "/jawa"
         }
       },
       {
@@ -33,24 +33,72 @@
         "height": "sm",
         "action": {
           "type": "message",
-          "label": "Jawa Barat",
-          "text": "32"
+          "label": "Sulawesi",
+          "text": "/sulawesi"
         }
       },
       {
         "type": "button",
         "action": {
           "type": "message",
-          "text": "35",
-          "label": "Jawa Timur"
+          "label": "Kalimantan",
+          "text": "/kalimantan"
         }
       },
       {
         "type": "button",
         "action": {
           "type": "message",
-          "label": "Jawa Tengah",
-          "text": "33"
+          "label": "Sumatera",
+          "text": "/sumatera"
+        }
+      },
+      {
+        "type": "button",
+        "action": {
+          "type": "message",
+          "label": "Bali",
+          "text": "51"
+        }
+      },
+      {
+        "type": "button",
+        "action": {
+          "type": "message",
+          "label": "Papua",
+          "text": "/papua"
+        }
+      },
+      {
+        "type": "button",
+        "action": {
+          "type": "message",
+          "label": "Maluku",
+          "text": "/maluku"
+        }
+      },
+      {
+        "type": "button",
+        "action": {
+          "type": "message",
+          "label": "Kepulauan RIau",
+          "text": "21"
+        }
+      },
+      {
+        "type": "button",
+        "action": {
+          "type": "message",
+          "label": "Nusa Tenggara Barat",
+          "text": "52"
+        }
+      },
+      {
+        "type": "button",
+        "action": {
+          "type": "message",
+          "label": "Nusa Tenggara Timur",
+          "text": "53"
         }
       },
       {

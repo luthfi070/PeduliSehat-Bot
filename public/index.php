@@ -143,6 +143,78 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                             ]
                         ],
                     ]);
+                }else if($event['message']['text'] == '/jawa'){
+                    $flexTemplateMenu = file_get_contents("../flexMessageJawa.json"); // template flex message
+                    $result = $httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
+                        'replyToken' => $event['replyToken'],
+                        'messages'   => [
+                            [ 
+                                'type'     => 'flex',
+                                'altText'  => 'Test Flex Message',
+                                'contents' => json_decode($flexTemplateMenu)
+                            ]
+                        ],
+                    ]);
+                }else if($event['message']['text'] == '/sulawesi'){
+                    $flexTemplateMenu = file_get_contents("../flexMessageSulawesi.json"); // template flex message
+                    $result = $httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
+                        'replyToken' => $event['replyToken'],
+                        'messages'   => [
+                            [ 
+                                'type'     => 'flex',
+                                'altText'  => 'Test Flex Message',
+                                'contents' => json_decode($flexTemplateMenu)
+                            ]
+                        ],
+                    ]);
+                }else if($event['message']['text'] == '/kalimantan'){
+                    $flexTemplateMenu = file_get_contents("../flexMessageKalimantan.json"); // template flex message
+                    $result = $httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
+                        'replyToken' => $event['replyToken'],
+                        'messages'   => [
+                            [ 
+                                'type'     => 'flex',
+                                'altText'  => 'Test Flex Message',
+                                'contents' => json_decode($flexTemplateMenu)
+                            ]
+                        ],
+                    ]);
+                }else if($event['message']['text'] == '/sumatera'){
+                    $flexTemplateMenu = file_get_contents("../flexMessageSumatera.json"); // template flex message
+                    $result = $httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
+                        'replyToken' => $event['replyToken'],
+                        'messages'   => [
+                            [ 
+                                'type'     => 'flex',
+                                'altText'  => 'Test Flex Message',
+                                'contents' => json_decode($flexTemplateMenu)
+                            ]
+                        ],
+                    ]);
+                }else if($event['message']['text'] == '/papua'){
+                    $flexTemplateMenu = file_get_contents("../flexMessagePapua.json"); // template flex message
+                    $result = $httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
+                        'replyToken' => $event['replyToken'],
+                        'messages'   => [
+                            [ 
+                                'type'     => 'flex',
+                                'altText'  => 'Test Flex Message',
+                                'contents' => json_decode($flexTemplateMenu)
+                            ]
+                        ],
+                    ]);
+                }else if($event['message']['text'] == '/maluku'){
+                    $flexTemplateMenu = file_get_contents("../flexMessageMaluku.json"); // template flex message
+                    $result = $httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
+                        'replyToken' => $event['replyToken'],
+                        'messages'   => [
+                            [ 
+                                'type'     => 'flex',
+                                'altText'  => 'Test Flex Message',
+                                'contents' => json_decode($flexTemplateMenu)
+                            ]
+                        ],
+                    ]);
                 }else{
                     for($i = 0; $i < 35; $i++){
                         if(in_array($event['message']['text'], $arrayPRov[0][$i]['attributes'])){
@@ -208,18 +280,6 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                             $stickerMessageBuilder = new StickerMessageBuilder($packageId, $stickerId);
                             $bot->replySticker($replyToken, 1, 3);
                         }
-                        // else{
-                        //     $result = $bot->replyText($event['replyToken'], $event['message']['text'] . " " . "kaga ada disini");
-    
-                        //     // or we can use replyMessage() instead to send reply message
-                        //     // $textMessageBuilder = new TextMessageBuilder($event['message']['text']);
-                        //     // $result = $bot->replyMessage($event['replyToken'], $textMessageBuilder);
-                            
-                        //     $response->getBody()->write(json_encode($result->getJSONDecodedBody()));
-                        //     return $response
-                        //         ->withHeader('Content-Type', 'application/json')
-                        //         ->withStatus($result->getHTTPStatus());
-                        // }
                     }
                 }
             }
