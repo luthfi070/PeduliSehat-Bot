@@ -225,7 +225,7 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
 "Kasus Meninggal : " . $arrayPRov[0][$i]['attributes']['Kasus_Meni']);
                         }else{
                             if($i == 33){
-                                $res = $bot->replyText($event['replyToken'], "hallo" . $event);
+                                $res = $bot->replyText($event['replyToken'], "hallo" . var_dump($event));
                                 $flexTemplateMenu = file_get_contents("../flexMessageGroup.json"); // template flex message
                                 $result = $httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
                                     'replyToken' => $event['replyToken'],
