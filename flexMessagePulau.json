@@ -81,7 +81,7 @@
         "type": "button",
         "action": {
           "type": "message",
-          "label": "Kepulauan RIau",
+          "label": "Kepulauan Riau",
           "text": "21"
         }
       },
@@ -99,6 +99,14 @@
           "type": "message",
           "label": "Nusa Tenggara Timur",
           "text": "53"
+        }
+      },
+      {
+        "type": "button",
+        "action": {
+          "type": "message",
+          "label": "Kembali ke Menu",
+          "text": "/mulai"
         }
       },
       {

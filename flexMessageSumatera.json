@@ -102,6 +102,14 @@
           }
         },
         {
+          "type": "button",
+          "action": {
+            "type": "message",
+            "label": "Kembali ke Menu",
+            "text": "/mulai"
+          }
+        },
+        {
           "type": "spacer",
           "size": "sm"
         }
