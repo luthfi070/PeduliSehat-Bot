@@ -103,7 +103,7 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
     if(is_array($data['events'])){
         foreach ($data['events'] as $event)
         {
-            if($event['source']['type'] == 'group' or $event['source']['type'] == 'room'){
+            if($event['source']['type'] == 'group' or $event['source']['type'] == 'room' or $event['source']['type'] != 'group' and $event['source']['type'] == 'room'){
                 if($event['message']['text'] == "/mulai"){
                     $flexTemplateMenu = file_get_contents("../flexMessageMenu.json"); // template flex message
                     $result = $httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
@@ -242,47 +242,48 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                         } 
                     }  
                 }    
-            }else{
-                if ($event['type'] == 'message')
-                {
-                    for($x = 0; $x < count($nama); $x++){
-                        if($event['message']['text'] == $nama[$x]){
-                            $result = $bot->replyText($event['replyToken'], $nama[$x] . "baik dechh");
-                            
-                            $response->getBody()->write(json_encode($result->getJSONDecodedBody()));
-                            return $response
-                                ->withHeader('Content-Type', 'application/json')
-                                ->withStatus($result->getHTTPStatus());
-                        }
-                    }
-                    if($event['message']['type'] == 'text')
-                    {
-                        if($event['message']['text'] == "/mulai")
-                        {
-                            $result = $bot->replyText($event['replyToken'], "cringeee");
-    
-                            $response->getBody()->write(json_encode($result->getJSONDecodedBody()));
-                            return $response
-                                ->withHeader('Content-Type', 'application/json')
-                                ->withStatus($result->getHTTPStatus());
-                        }
-                        else if($event['message']['text'] == "hitomi"){
-    
-                            $result = $bot->replyText($event['replyToken'], "istrinya luthfi bukan");
-    
-                            $response->getBody()->write(json_encode($result->getJSONDecodedBody()));
-                            return $response
-                                ->withHeader('Content-Type', 'application/json')
-                                ->withStatus($result->getHTTPStatus());    
-    
-                            $packageId = 1;
-                            $stickerId = 3;
-                            $stickerMessageBuilder = new StickerMessageBuilder($packageId, $stickerId);
-                            $bot->replySticker($replyToken, 1, 3);
-                        }
-                    }
-                }
             }
+            // }else{
+            //     if ($event['type'] == 'message')
+            //     {
+            //         for($x = 0; $x < count($nama); $x++){
+            //             if($event['message']['text'] == $nama[$x]){
+            //                 $result = $bot->replyText($event['replyToken'], $nama[$x] . "baik dechh");
+                            
+            //                 $response->getBody()->write(json_encode($result->getJSONDecodedBody()));
+            //                 return $response
+            //                     ->withHeader('Content-Type', 'application/json')
+            //                     ->withStatus($result->getHTTPStatus());
+            //             }
+            //         }
+            //         if($event['message']['type'] == 'text')
+            //         {
+            //             if($event['message']['text'] == "/mulai")
+            //             {
+            //                 $result = $bot->replyText($event['replyToken'], "cringeee");
+    
+            //                 $response->getBody()->write(json_encode($result->getJSONDecodedBody()));
+            //                 return $response
+            //                     ->withHeader('Content-Type', 'application/json')
+            //                     ->withStatus($result->getHTTPStatus());
+            //             }
+            //             else if($event['message']['text'] == "hitomi"){
+    
+            //                 $result = $bot->replyText($event['replyToken'], "istrinya luthfi bukan");
+    
+            //                 $response->getBody()->write(json_encode($result->getJSONDecodedBody()));
+            //                 return $response
+            //                     ->withHeader('Content-Type', 'application/json')
+            //                     ->withStatus($result->getHTTPStatus());    
+    
+            //                 $packageId = 1;
+            //                 $stickerId = 3;
+            //                 $stickerMessageBuilder = new StickerMessageBuilder($packageId, $stickerId);
+            //                 $bot->replySticker($replyToken, 1, 3);
+            //             }
+            //         }
+            //     }
+            // }
         }
     }
 });
