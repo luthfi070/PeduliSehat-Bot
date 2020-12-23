@@ -147,7 +147,7 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                     for($i = 0; $i < 35; $i++){
                         if(in_array($event['message']['text'], $arrayPRov[0][$i]['attributes'])){
                             $res = $bot->replyText($event['replyToken'],
-"Berikut data untuk provinsi" . $arrayPRov[0][$i]['attributes']['Provinsi'] . 
+"Provinsi " . $arrayPRov[0][$i]['attributes']['Provinsi'] . 
 "Kasus Positif   : " . $arrayPRov[0][$i]['attributes']['Kasus_Posi'] . 
 "Kasus Sembuh    : " . $arrayPRov[0][$i]['attributes']['Kasus_Semb'] .
 "Kasus Meninggal : " . $arrayPRov[0][$i]['attributes']['Kasus_Meni']);
