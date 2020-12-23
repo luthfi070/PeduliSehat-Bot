@@ -227,6 +227,8 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                             if($i == 33){
                                 if($event['source']['type'] === 'group' or $event['source']['type'] === 'room'){
                                     if($event['message']['text'] != null){
+                                        $res = $bot->replyText($event['replyToken'], "Maaf, " . $event['message']['text'] . " tidak ada dalam keyword kami, silahkan ketik /mulai");
+                                    }else{
                                         $flexTemplateMenu = file_get_contents("../flexMessageGroup.json"); // template flex message
                                         $result = $httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
                                             'replyToken' => $event['replyToken'],
@@ -237,9 +239,8 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                                                     'contents' => json_decode($flexTemplateMenu)
                                                 ]
                                             ],
-                                        ]);
-                                    }else{
-                                        $res = $bot->replyText($event['replyToken'], "Maaf, " . $event['message']['text'] . " tidak ada dalam keyword kami, silahkan ketik /mulai");                                    }
+                                        ]);                                   
+                                    }
                                 }else{
                                     $flexTemplateMenu = file_get_contents("../flexMessagePersonal.json"); // template flex message
                                     $result = $httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
