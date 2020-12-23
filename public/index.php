@@ -103,7 +103,7 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
     if(is_array($data['events'])){
         foreach ($data['events'] as $event)
         {
-            if($event['source']['type'] == 'group' or $event['source']['type'] == 'room' or $event['source']['type'] == 'personal'){
+            if($event['source']['type'] == 'group' or $event['source']['type'] == 'room' or $event['source']['type'] == 'chat'){
                 if($event['message']['text'] == "/mulai"){
                     $flexTemplateMenu = file_get_contents("../flexMessageMenu.json"); // template flex message
                     $result = $httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
@@ -242,6 +242,8 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                         } 
                     }  
                 }    
+            }else{
+                $res = $bot->replyText($event['replyToken'], $event['source']['type']);
             }
             // }else{
             //     if ($event['type'] == 'message')
