@@ -146,7 +146,11 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                 }else{
                     for($i = 0; $i < 35; $i++){
                         if(in_array($event['message']['text'], $arrayPRov[0][$i]['attributes'])){
-                            $res = $bot->replyText($event['replyToken'], "ada");
+                            $res = $bot->replyText($event['replyToken'],
+"Berikut data untuk provinsi" . $arrayPRov[0][$i]['attributes']['Provinsi'] . 
+"Kasus Positif   : " . $arrayPRov[0][$i]['attributes']['Kasus_Posi'] . 
+"Kasus Sembuh    : " . $arrayPRov[0][$i]['attributes']['Kasus_Semb'] .
+"Kasus Meninggal : " . $arrayPRov[0][$i]['attributes']['Kasus_Meni']);
                         }else{
                             if($i == 34){
                                 $flexTemplateMenu = file_get_contents("../flexMessagePulau.json"); // template flex message
