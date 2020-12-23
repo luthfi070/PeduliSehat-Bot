@@ -92,14 +92,6 @@
         }
       },
       {
-        "type": "button",
-        "action": {
-          "type": "message",
-          "label": "Lihat Negara",
-          "text": "/negara"
-        }
-      },
-      {
         "type": "spacer",
         "size": "sm"
       }

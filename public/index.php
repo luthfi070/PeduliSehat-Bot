@@ -242,17 +242,21 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                                         ]);                                   
                                     }
                                 }else{
-                                    $flexTemplateMenu = file_get_contents("../flexMessagePersonal.json"); // template flex message
-                                    $result = $httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
-                                        'replyToken' => $event['replyToken'],
-                                        'messages'   => [
-                                            [ 
-                                                'type'     => 'flex',
-                                                'altText'  => 'Test Flex Message',
-                                                'contents' => json_decode($flexTemplateMenu)
-                                            ]
-                                        ],
-                                    ]);
+                                    if($event['message']['text'] != null){
+                                        $res = $bot->replyText($event['replyToken'], "Maaf, " . $event['message']['text'] . " tidak ada dalam keyword kami, silahkan ketik /mulai");
+                                    }else{
+                                        $flexTemplateMenu = file_get_contents("../flexMessagePersonal.json"); // template flex message
+                                        $result = $httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
+                                            'replyToken' => $event['replyToken'],
+                                            'messages'   => [
+                                                [ 
+                                                    'type'     => 'flex',
+                                                    'altText'  => 'Test Flex Message',
+                                                    'contents' => json_decode($flexTemplateMenu)
+                                                ]
+                                            ],
+                                        ]);
+                                    }
                                 }
                             }else{
                                 continue;
@@ -261,47 +265,6 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                     }  
                 }    
             }
-            // }else{
-            //     if ($event['type'] == 'message')
-            //     {
-            //         for($x = 0; $x < count($nama); $x++){
-            //             if($event['message']['text'] == $nama[$x]){
-            //                 $result = $bot->replyText($event['replyToken'], $nama[$x] . "baik dechh");
-                            
-            //                 $response->getBody()->write(json_encode($result->getJSONDecodedBody()));
-            //                 return $response
-            //                     ->withHeader('Content-Type', 'application/json')
-            //                     ->withStatus($result->getHTTPStatus());
-            //             }
-            //         }
-            //         if($event['message']['type'] == 'text')
-            //         {
-            //             if($event['message']['text'] == "/mulai")
-            //             {
-            //                 $result = $bot->replyText($event['replyToken'], "cringeee");
-    
-            //                 $response->getBody()->write(json_encode($result->getJSONDecodedBody()));
-            //                 return $response
-            //                     ->withHeader('Content-Type', 'application/json')
-            //                     ->withStatus($result->getHTTPStatus());
-            //             }
-            //             else if($event['message']['text'] == "hitomi"){
-    
-            //                 $result = $bot->replyText($event['replyToken'], "istrinya luthfi bukan");
-    
-            //                 $response->getBody()->write(json_encode($result->getJSONDecodedBody()));
-            //                 return $response
-            //                     ->withHeader('Content-Type', 'application/json')
-            //                     ->withStatus($result->getHTTPStatus());    
-    
-            //                 $packageId = 1;
-            //                 $stickerId = 3;
-            //                 $stickerMessageBuilder = new StickerMessageBuilder($packageId, $stickerId);
-            //                 $bot->replySticker($replyToken, 1, 3);
-            //             }
-            //         }
-            //     }
-            // }
         }
     }
 });
