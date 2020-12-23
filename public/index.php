@@ -226,6 +226,7 @@ $app->post('/webhook', function (Request $request, Response $response) use ($cha
                         }else{
                             if($i == 33){
                                 if($event['source']['type'] === 'group' or $event['source']['type'] === 'room'){
+                                    $flexTemplateMenu = file_get_contents("../flexMessageGroup.json"); // template flex message
                                     $result = $httpClient->post(LINEBot::DEFAULT_ENDPOINT_BASE . '/v2/bot/message/reply', [
                                         'replyToken' => $event['replyToken'],
                                         'messages'   => [
